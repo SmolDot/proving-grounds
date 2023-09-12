@@ -10,19 +10,19 @@ on:
       - main
     paths:
       - tf/**
-env: 
-  environment: "dev"
-  workingDir: "./tf"
+# env: 
+#   environment: "dev"
+#   workingDir: "./tf"
 
 jobs:
   job:
-    name: Terraform Plan ${{ env.environment }}
+    name: Terraform Plan dev
 
-    environment: ${{ env.environment }}
+    environment: dev
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ${{ env.workingDir }}
+        working-directory: "./tf"
 
     steps:
       - name: Checkout
@@ -42,7 +42,7 @@ jobs:
 
       - name: terraform init -upgrade
         id: init
-        run: terraform init -backend-config=${{env.tfInitConfigFile}} -upgrade
+        run: terraform init -upgrade
 
 
       - name: terraform validate
