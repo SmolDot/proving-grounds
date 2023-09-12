@@ -11,7 +11,7 @@ on:
     paths:
       - tf/**
 env: 
-  environment: dev
+  environment: "dev"
   workingDir: "./tf"
 
 jobs:
