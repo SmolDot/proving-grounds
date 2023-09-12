@@ -37,5 +37,7 @@ jobs:
           echo "${{steps.test.outputs.test}}"
           echo "!contains(${{steps.npmi.outputs.audit}}, 'found 0')"
       - name: check output
-        if: ${{ !contains(steps.test.outputs.test, 'passed!') }}
-        run: exit 1
+        if: ${{ !contains(steps.test.outputs.test, 'Fail!') }}
+        run: |
+          echo "Fail!"
+          exit 1
