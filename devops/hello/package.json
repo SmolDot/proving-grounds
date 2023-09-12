@@ -7,7 +7,7 @@
     "type": "module",
     "scripts": {
         "start": "node src/index.js",
-        "test": "node src/test.js && echo 'passed!'"
+        "test": "node src/test.js && echo 'failed!'"
     },
     "author": "novorender",
     "license": "ISC",
