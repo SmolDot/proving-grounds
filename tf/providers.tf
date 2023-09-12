@@ -1,3 +1,8 @@
+variable "oidc_token" {}
+variable "oidc_token_file_path" {}
+variable "oidc_request_token" {}
+variable "oidc_request_url" {}
+
 terraform {
   required_version = "~> 1.2"
   # Use these plugins
@@ -22,6 +27,15 @@ terraform {
     use_oidc             = true
     tenant_id            = "5d557c61-2a5a-4d56-9bdc-37464d75f65b"
     client_id            = "90e8ee9c-8b65-4622-9836-c1979c103f97"
+    # for GitHub Actions
+    oidc_request_token = var.oidc_request_token
+    oidc_request_url   = var.oidc_request_url
+
+    # for other generic OIDC providers, providing token directly
+    oidc_token = var.oidc_token
+
+    # for other generic OIDC providers, reading token from a file
+    oidc_token_file_path = var.oidc_token_file_path
   }
 
 }
