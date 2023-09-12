@@ -20,6 +20,7 @@ terraform {
     resource_group_name  = "state-access"
     use_oidc             = true
     tenant_id            = "5d557c61-2a5a-4d56-9bdc-37464d75f65b"
+    client_id            = "90e8ee9c-8b65-4622-9836-c1979c103f97"
   }
 
 }
