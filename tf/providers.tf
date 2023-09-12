@@ -1,6 +1,6 @@
 terraform {
   required_version = "~> 1.2"
-  # Use these plugins
+
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
