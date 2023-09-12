@@ -1,3 +1,0 @@
-      echo "TEST=$(npm test)\n" >> $GITHUB_OUTPUT
-      # echo "npmi=$(npm i)\n" >> $GITHUB_OUTPUT
-        # if: "!contains(${{steps.npmi.outputs.test}}, 'found 0 vulnerabilities')"
