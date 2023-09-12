@@ -15,7 +15,9 @@ env:
   workingDir: "./tf"
 jobs:
   plan:
-    if: "${{ github.event_name == 'pull_request' }}"
+  ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+  ARM_TENANT_ID: ${{ secrets.TENANT_ID }}
       jobs:
         plan:
           concurrency: tf-${{ github.repository }}-${{ env.environment }}-${{ env.workingDir }}
@@ -57,7 +59,6 @@ jobs:
               id: validate
               run: terraform validate -no-color
 
-
             - name: Terraform Plan
               if: "${{ github.event_name == 'pull_request' }}"
               run: |
@@ -67,6 +68,3 @@ jobs:
               if: "${{ github.ref == 'refs/heads/main' && github.event_name == 'push'}}"
               run: terraform apply
 
-  ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-  ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-  ARM_TENANT_ID: ${{ secrets.TENANT_ID }}
