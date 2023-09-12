@@ -1,0 +1,72 @@
+name: (Dev) Terraform Plan & Apply
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - tf/**
+  pull_request:
+    branches:
+      - main
+    paths:
+      - tf/**
+# env: 
+#   environment: "dev"
+#   workingDir: "./tf"
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  job:
+    name: Terraform Plan dev
+
+    environment: dev
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: "./tf"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: 'Az CLI login using OIDC'
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2.0.3
+        with:
+          terraform_version: latest
+          terraform_wrapper: false
+
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt -check
+
+
+
+      - name: terraform init -upgrade
+        id: init
+        run: terraform init -upgrade
+
+      - name: terraform validate
+        id: validate
+        run: terraform validate -no-color
+
+      - name: Terraform Plan
+        if: "${{ github.event_name == 'pull_request' }}"
+        run: |
+          terraform plan 
+        continue-on-error: true
+
+      - name: Terraform Apply 
+        if: "${{ github.ref == 'refs/heads/main' && github.event_name == 'push'}}"
+        run: terraform apply
+
