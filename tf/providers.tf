@@ -27,6 +27,14 @@ terraform {
     use_oidc             = true
     tenant_id            = "5d557c61-2a5a-4d56-9bdc-37464d75f65b"
     client_id            = "90e8ee9c-8b65-4622-9836-c1979c103f97"
+
+
+  }
+
+  provider "azurerm" {
+    features {}
+    subscription_id     = "5f003acd-6f4e-444d-b31e-f25a41931ce9"
+    storage_use_azuread = true
     # for GitHub Actions
     oidc_request_token = var.oidc_request_token
     oidc_request_url   = var.oidc_request_url
@@ -37,13 +45,6 @@ terraform {
     # for other generic OIDC providers, reading token from a file
     oidc_token_file_path = var.oidc_token_file_path
   }
-
-}
-
-provider "azurerm" {
-  features {}
-  subscription_id     = "5f003acd-6f4e-444d-b31e-f25a41931ce9"
-  storage_use_azuread = true
 }
 
 provider "azuread" {
