@@ -7,7 +7,7 @@ resource "azurerm_resource_group" "rg" {
 }
 
 resource "azurerm_storage_account" "git_storage" {
-  name                     = "gitteststoraget6y7u89io012e"
+  name                     = "gitteststoraget6y7u89io0"
   resource_group_name      = azurerm_resource_group.rg.name
   location                 = azurerm_resource_group.rg.location
   account_tier             = "Standard"
