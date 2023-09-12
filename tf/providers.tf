@@ -18,7 +18,8 @@ terraform {
     storage_account_name = "statestorageleroytest"
     key                  = "terraform.tfstate"
     resource_group_name  = "state-access"
-    use_azuread_auth     = true
+    use_oidc             = true
+    tenant_id            = "5d557c61-2a5a-4d56-9bdc-37464d75f65b"
   }
 
 }
