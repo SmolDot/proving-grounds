@@ -1,8 +1,3 @@
-variable "oidc_token" {}
-variable "oidc_token_file_path" {}
-variable "oidc_request_token" {}
-variable "oidc_request_url" {}
-
 terraform {
   required_version = "~> 1.2"
   # Use these plugins
