@@ -30,21 +30,21 @@ terraform {
 
 
   }
+}
+provider "azurerm" {
+  features {}
+  subscription_id     = "5f003acd-6f4e-444d-b31e-f25a41931ce9"
+  storage_use_azuread = true
+  # for GitHub Actions
+  oidc_request_token = var.oidc_request_token
+  oidc_request_url   = var.oidc_request_url
 
-  provider "azurerm" {
-    features {}
-    subscription_id     = "5f003acd-6f4e-444d-b31e-f25a41931ce9"
-    storage_use_azuread = true
-    # for GitHub Actions
-    oidc_request_token = var.oidc_request_token
-    oidc_request_url   = var.oidc_request_url
+  # for other generic OIDC providers, providing token directly
+  oidc_token = var.oidc_token
 
-    # for other generic OIDC providers, providing token directly
-    oidc_token = var.oidc_token
+  # for other generic OIDC providers, reading token from a file
+  oidc_token_file_path = var.oidc_token_file_path
 
-    # for other generic OIDC providers, reading token from a file
-    oidc_token_file_path = var.oidc_token_file_path
-  }
 }
 
 provider "azuread" {
