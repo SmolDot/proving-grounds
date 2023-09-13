@@ -1,8 +1,32 @@
 using System.IO.Compression;
 
-static class Zip
+internal static class Zip
 {
     // Write a zip file with specified number of files of 1MiB each with random content.
+    public static async Task WriteAsync(Stream stream, int files)
+    {
+        var seed = 123;
+        var rnd = new Random(seed);
+        using (var archive = new ZipArchive(stream, ZipArchiveMode.Create))
+        {
+            var buffer = new byte[0x100000];
+            for (var i = 0; i < files; i++)
+            {
+                rnd.NextBytes(buffer);
+                var name = i.ToString();
+                var entry = archive.CreateEntry(name);
+                await using (var entryStream = entry.Open())
+                {
+                    await entryStream.WriteAsync(buffer);
+                }
+            }
+        }
+        
+
+    }
+
+
+        // Write a zip file with specified number of files of 1MiB each with random content.
     public static void Write(Stream stream, int files)
     {
         var seed = 123;

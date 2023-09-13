@@ -1,10 +1,10 @@
-# resource "azurerm_resource_group" "rg" {
-#   name     = "git-test"
-#   location = "norwayeast"
-#   lifecycle {
-#     ignore_changes = [tags]
-#   }
-# }
+resource "azurerm_resource_group" "rg" {
+  name     = "git-test"
+  location = "norwayeast"
+  lifecycle {
+    ignore_changes = [tags]
+  }
+}
 
 # resource "azurerm_storage_account" "git_storage" {
 #   name                     = "gitteststoraget6y7u89io0"

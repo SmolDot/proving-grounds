@@ -2,16 +2,14 @@ var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
 app.MapGet("/", () => "Hello World!");
-app.MapGet("/{files}", (int files) => 
+app.MapGet("/{files}", async(int files) => 
     {
-        Stream a;
-        
-        using (FileStream fs = new FileStream(@"./asp.net/README.md", FileAccess.Read, FileAccess.Write))
+        await using (FileStream fs = new FileStream("./test.zip", FileMode.OpenOrCreate))
         {
-            Zip.Write(fs, files);
-            a = fs;
+            await Zip.WriteAsync(fs, files);
+            return fs.Response.ContentType = "application/octet-stream";
         }
-        return a;
+        
     }
 );
 app.Run();
