@@ -9,7 +9,6 @@ app.MapGet("/{files}", async(int files) =>
             await Zip.WriteAsync(fs, files);
             return fs.Response.ContentType = "application/octet-stream";
         }
-        
     }
 );
 app.Run();
